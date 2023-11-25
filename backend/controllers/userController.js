@@ -117,36 +117,37 @@ exports.forgotPassword = catchAsyncError(async(req,res,next)=>{
 });
 
 //Reset Password
-exports.resetPassword = catchAsyncError(async(req,res,next)=>{
-
-    //creating token hash
-   const resetPasswordToken = crypto
-    .createHash("sha256")
+exports.resetPassword = catchAsyncError(async (req, res, next) => {
+  // Create token hash
+  const resetPasswordToken = crypto
+    .createHash('sha256')
     .update(req.params.token)
-    .digest("hex");
+    .digest('hex');
 
-    const user = await User.findOne({
-        resetPasswordToken,
-        resetPasswordExpire:{$gt:Date.now() },
-    });
+  const user = await User.findOne({
+    resetPasswordToken,
+    resetPasswordExpire: { $gt: Date.now() },
+  });
 
-    if(!user){
-        return next(new ErrorHander("Reset Password Token is invalid!",404))
-    }
+  if (!user) {
+    return next(new ErrorHander('Reset Password Token is invalid!', 404));
+  }
 
-    if(req.body.password !== req.body.confirmPassword){
-        return next(new Error("Password does not exist",400))
-    }
+  if (req.body.password !== req.body.confirmPassword) {
+    return next(new Error('Passwords do not match', 400));
+  }
 
-    user.password = req.body.password;
-    user.resetPasswordExpire= undefined;
-    user.resetPasswordToken= undefined;
+  // Update user password, clear reset token and expiry
+  user.password = req.body.password;
+  user.resetPasswordExpire = undefined;
+  user.resetPasswordToken = undefined;
 
-    await user.save();
+  await user.save();
 
-    sendToken(user, 200,res);
-
+  // Send token with updated user information
+  sendToken(user, 200, res);
 });
+
 
 
 // Get User Details
@@ -189,7 +190,7 @@ exports.updatePassword = catchAsyncError(async(req,res,next)=>{
 });
 
 
-// Update User Profile
+// Update User Profile - admin
 exports.updateProfile = catchAsyncError(async(req,res,next)=>{
 
    const newUserData = {
@@ -214,4 +215,88 @@ exports.updateProfile = catchAsyncError(async(req,res,next)=>{
    sendToken(user,200,res);
 
 });
+
+// Update User Role - admin
+
+exports.updateUserRole = catchAsyncError(async (req, res, next) => {
+  let user = await User.findById(req.params.id);
+
+  const newUserData = {
+    name: req.body.name,
+    email: req.body.email,
+    role: req.body.role,
+  };
+
+  // Cloudinary - Assuming cloudinary operations are missing in this snippet
+
+  user = await User.findByIdAndUpdate(req.params.id, newUserData, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  // Ensure user is updated before sending the response
+  sendToken(user, 200, res);
+
+  res.status(200).json({
+    success: true,
+  });
+});
+
+// Delete User - admin
+exports.deleteUser = catchAsyncError(async(req,res,next)=>{
+    try {
+        const userid = req.params.id; // Extract the product ID from the request parameters
+    
+        // Find the product by ID and delete it
+        const user = await User.findOneAndDelete({ _id: userid });
+    
+        if(!user){
+          return next(new ErrorHander("Product Not Found",404));
+        }
+  
+    
+        res.status(200).json({
+          success: true,
+          message: "Product has been deleted"
+        });
+      } catch (error) {
+        return res.status(500).json({
+          success: false,
+          message: "Internal server error",
+          error: error.message
+        });
+      }
+ });
+
+
+
+
+//Get all USER - ADMIN
+
+exports.getAllUser = catchAsyncError(async(req,res,next)=>{
+
+    const user = await User.find();
+
+    res.status(200).json({
+        success:true,
+        user,
+    });
+});
+//Get Single USER - ADMIN
+
+exports.getSingleUser = catchAsyncError(async(req,res,next)=>{
+
+    const user = await User.findById(req.params.id);
+
+    if(!user){
+        return next(new ErrorHander(`User Does not Exist: ${req.params.id}`))
+    }
+
+    res.status(200).json({
+        success:true,
+        user,
+    });
+});
+
 
