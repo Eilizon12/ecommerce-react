@@ -36,8 +36,10 @@ exports.getProductDetails = async(req, res)=>{
     const product = await Product.findById(req.params.id);
 
     if(!product){
-      return next(new ErrorHander("Product not found",404));
-      
+      res.status(500).json({
+        success:false,
+        message:"Product not found"
+      });
     }
 
     res.status(200).json({
