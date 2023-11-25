@@ -95,7 +95,7 @@ exports.forgotPassword = catchAsyncError(async(req,res,next)=>{
 
     try{
         await sendEmail({
-            email:user.email,
+            email: user.email,
             subject:`Ecommerce-react password recovery`,
             message,
         });
