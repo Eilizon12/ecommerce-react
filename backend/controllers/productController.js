@@ -27,32 +27,24 @@ exports.getAllProduct = async(req, res)=> {
 
 }
 //Get Product Details
-exports.getProductDetails = async(req, res, next)=>{
-    try {
-        const productId = req.params.id; // Extract the product ID from the request parameters
-    
-        // Find the product by ID and delete it
-        const product = await Product.findById({ _id: productId });
-    
-        if (!product) {
-          return res.status(404).json({
-            success: false,
-            message: "Product not found"
-          });
-        }
-    
-        res.status(200).json({
-          success: true,
-         product
-        });
-      } catch (error) {
-        return res.status(500).json({
-          success: false,
-          message: "Internal server error",
-          error: error.message
-        });
-      }
-};
+exports.getProductDetails = async(req, res)=>{
+
+    const product = await Product.findById(req.params.id);
+
+    if(!product){
+      return res.status(500).json({
+        success:false,
+        message:"product not found"
+      })
+    }
+
+    res.status(200).json({
+      success:true,
+      product
+    })
+
+
+}
 //Update Product - Admin
 exports.updateProduct = async(req,res,next)=>{
 
