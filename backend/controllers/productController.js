@@ -1,5 +1,7 @@
 const Product = require("../models/productModel");
+const ApiFeatures = require("../utils/apifeatures");
 const ErrorHander = require("../utils/errorHander");
+
 
 // Create Product - Admin
 exports.createProduct = async(req,res,next)=>
@@ -14,18 +16,19 @@ exports.createProduct = async(req,res,next)=>
 //Get All The Product
 exports.getAllProduct = async(req, res)=> {
 
-    const product = await Product.find();
 
+  const resultPerPage = 5;  
+  const productCount = await Product.countDocument();
+
+ const apiFeatures = new ApiFeatures(Product.find(),req.query)
+ .search()
+ .filter()
+ .pagination(resultPerPage);
+    const product = await apiFeatures.query;
     res.status(200).json({
-
       success:true,
       product
-
     })
-
-
-
-
 }
 //Get Product Details
 exports.getProductDetails = async(req, res)=>{
@@ -39,9 +42,9 @@ exports.getProductDetails = async(req, res)=>{
 
     res.status(200).json({
       success:true,
-      product
-    })
-
+      product,
+      productCount,
+    });
 
 }
 //Update Product - Admin
