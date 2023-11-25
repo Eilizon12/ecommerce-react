@@ -4,16 +4,7 @@ const ErrorHander = require("../utils/errorHander");
 const catchAsyncError = require("../middleware/catchAsyncError");
 
 
-// Create Product - Admin
-exports.createProduct = catchAsyncError(async(req,res,next)=>
-{
-    const product = await Product.create(req.body);
 
-    res.status(201).json({
-        success:true,
-        product
-    });
-});
 //Get All The Product
 exports.getAllProduct = catchAsyncError(async(req,res)=> {
 
@@ -45,6 +36,16 @@ exports.getProductDetails = catchAsyncError(async(req,res,next)=>{
       product,
     });
  
+});
+// Create Product - Admin
+exports.createProduct = catchAsyncError(async(req,res,next)=>
+{
+    const product = await Product.create(req.body);
+
+    res.status(201).json({
+        success:true,
+        product
+    });
 });
 //Update Product - Admin
 exports.updateProduct = catchAsyncError(async(req,res,next)=>{
