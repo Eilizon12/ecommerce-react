@@ -18,7 +18,7 @@ exports.getAllProduct = async(req, res)=> {
 
 
   const resultPerPage = 5;  
-  const productCount = await Product.countDocument();
+  // const productCount = await Product.countDocument();
 
  const apiFeatures = new ApiFeatures(Product.find(),req.query)
  .search()
@@ -43,8 +43,8 @@ exports.getProductDetails = async(req, res)=>{
     res.status(200).json({
       success:true,
       product,
-      productCount,
     });
+
 
 }
 //Update Product - Admin
@@ -53,12 +53,10 @@ exports.updateProduct = async(req,res,next)=>{
         let product = await Product.findById(req.params.id);
 
         if(!product){
-            return res.status(500).json({
-                
-                success:false,
-                message:"Product not found!"
-            })
+          return next(new ErrorHander("Product not found",404));
+          
         }
+    
 
         product = await Product.findByIdAndUpdate(req.params.id,req.body,{
             new:true,
@@ -79,12 +77,11 @@ exports.deleteProduct = async (req, res, next) => {
       // Find the product by ID and delete it
       const product = await Product.findOneAndDelete({ _id: productId });
   
-      if (!product) {
-        return res.status(404).json({
-          success: false,
-          message: "Product not found"
-        });
-      }
+      if(!product){
+      return next(new ErrorHander("Product not found",404));
+      
+    }
+
   
       res.status(200).json({
         success: true,
