@@ -96,3 +96,96 @@ exports.deleteProduct = catchAsyncError(async (req, res, next) => {
       });
     }
 });
+
+
+//Create Review or Update Review
+exports.createReview = catchAsyncError(async (req, res, next) => {
+  const { rating, comment, productId } = req.body;
+
+  const review = {
+    user: req.user._id,
+    name: req.user.name,
+    rating: Number(rating),
+    comment,
+  };
+
+  const product = await Product.findById(productId);
+
+  const isReviewed = product.reviews.find(
+    (rev) => rev.user.toString() === req.user._id.toString()
+  );
+
+  if (isReviewed) {
+    product.reviews.forEach((rev) => {
+      if (rev.user.toString() === req.user._id.toString()) {
+        rev.rating = rating;
+        rev.comment = comment;
+      }
+    });
+  } else {
+    product.reviews.push(review);
+  }
+
+  // Recalculate average ratings
+  let totalRating = 0;
+  product.reviews.forEach((rev) => {
+    totalRating += rev.rating;
+  });
+
+  product.numOfReviews = product.reviews.length;
+
+  // Calculate the average rating based on the totalRating and numOfReviews
+  product.ratings = totalRating / product.numOfReviews;
+
+  await product.save({ validateBeforeSave: false });
+
+  res.status(200).json({
+    success: true,
+    message: 'Successfully Add Rating and Comment',
+  });
+});
+
+
+//Get All Reviews
+exports.getAllReviews = catchAsyncError(async (req, res, next) => {
+
+  const product = await Product.findById(req.query.id);
+
+  if(!product){
+    return next(new ErrorHander("Product not Found",400))
+  }
+
+  res.status(200).json({
+    success:true,
+    reviews:product.reviews,
+  });
+});
+
+// Delete Reviews
+exports.deleteAllReviews = catchAsyncError(async (req, res, next) => {
+  const productId = req.query.productId;
+
+  // Find the product by its ID
+  const product = await Product.findById(productId);
+
+  if (!product) {
+    return next(new ErrorHander('Product not found!', 404));
+  }
+
+  // Remove all reviews associated with the product
+  product.reviews = [];
+
+  // Reset ratings and number of reviews to 0
+  product.ratings = 0;
+  product.numOfReviews = 0;
+
+  // Save the updated product without reviews
+  await product.save();
+
+  res.status(200).json({
+    success: true,
+    message: 'All reviews for the product have been successfully deleted.',
+  });
+});
+
+
