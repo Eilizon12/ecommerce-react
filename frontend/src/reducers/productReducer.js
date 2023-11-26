@@ -1,3 +1,6 @@
+
+
+
 import {
   ALL_PRODUCT_FAIL,
   ALL_PRODUCT_REQUEST,
@@ -7,7 +10,7 @@ import {
 
 
 
-const productReducer = (state = {products: [] }, action) => {
+const productReducer = (state = { products: [] }, action) => {
   switch (action.type) {
     case ALL_PRODUCT_REQUEST:
       return {

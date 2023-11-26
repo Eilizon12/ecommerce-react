@@ -8,15 +8,13 @@ import { useSelector, useDispatch   } from "react-redux";
 
 
 
-const product = {
-    name: "Helmet Rapido Kask",
-    images: [{url: "https://images-na.ssl-images-amazon.com/images/I/41hltv9c9pL.jpg"}],
-    price: "$450",
-    _id: "user1", 
-};
+
 
 const Home = () => {
     const dispatch = useDispatch();
+    const {loading, error, products, productsCount } = useSelector ( (state) => state.products);
+
+
     useEffect(()=>{
 
         dispatch(getProduct());
@@ -46,7 +44,9 @@ const Home = () => {
 
     <div className="container" id = "container">
 
-    <Product product = {product} />      
+{products && products.map((product) => (
+    <Product product = {product} />))}     
+       
       
     </div>
   </Fragment>

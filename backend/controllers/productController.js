@@ -17,19 +17,19 @@ exports.getAllProduct = catchAsyncError(async(req,res)=> {
  .search()
  .filter()
  .pagination(resultPerPage);
-    const product = await apiFeatures.query;
+    const products = await apiFeatures.query;
     res.status(200).json({
       success:true,
-      product,
+      products,
       productCount,
     });
 });
 //Get Product Details
 exports.getProductDetails = catchAsyncError(async(req,res,next)=>{
 
-    const product = await Product.findById(req.params.id);
+    const products = await Product.findById(req.params.id);
 
-    if(!product){
+    if(!products){
       return next(new ErrorHander("Product Not Found",404));
     }
 
