@@ -87,21 +87,68 @@ exports.getAllOrders = catchAsyncError(async(req,res,next)=>{
 });
 
 // Update order - admin
-exports.getAllOrders = catchAsyncError(async(req,res,next)=>{
+exports.getUpdateOrders = catchAsyncError(async(req,res,next)=>{
+    const orders = await Order.findById(req.params.id);
 
-    const order = await Order.find(req.params.id);
 
-    if(order.orderStatus === "Delivered"){
+    if (!orders) {
+        return next(new ErrorHander("Order not Found", 404));
+    }
+
+    if(orders.orderStatus === "Delivered"){
         return next(new ErrorHander("You have already delivered this product",400));
     }
 
 
-    order.orderItems
+  orders.orderItems.forEach(async(o)=>{
+    await updateStock(o.Product,o.quantity);
+  });
+
+  orders.orderStatus = req.body.status;
+
+
+  if(req.body.status === "Delivered"){
+  orders.deliveredAt = Date.now();
+
+  }
   
+  await orders.save({validateBeforeSave:false});
+
 
     res.status(200).json({
         success:true,
-        totalAmount,
-        orders,
     });
+   
+});
+
+async function updateStock(id, quantity){
+    const product = await Product.findById(id);
+
+    product.Stock -= quantity;
+
+    await product.save ({ validateBeforeSave:false });
+}
+
+// Delete Orders -- Admin
+exports.getDeleteOrders = catchAsyncError(async (req, res, next) => {
+    try {
+        const order = await Order.findById(req.params.id);
+
+        if (!order) {
+            return next(new ErrorHander("Order not Found", 404));
+        }
+
+        // Calculate total amount based on order details
+        const totalAmount = calculateTotalAmount(order); // Replace this with your logic to calculate total amount
+
+        await order.remove();
+
+        res.status(200).json({
+            success: true,
+            totalAmount,
+            message: "Order deleted successfully",
+        });
+    } catch (error) {
+        return next(new ErrorHander("Error deleting order", 500));
+    }
 });
