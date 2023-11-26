@@ -10,7 +10,8 @@ exports.getAllProduct = catchAsyncError(async(req,res)=> {
 
 
   const resultPerPage = 5;  
-  // const productCount = await Product.countDocument();
+  const productCount = await Product.countDocument();
+
 
  const apiFeatures = new ApiFeatures(Product.find(),req.query)
  .search()
@@ -19,7 +20,8 @@ exports.getAllProduct = catchAsyncError(async(req,res)=> {
     const product = await apiFeatures.query;
     res.status(200).json({
       success:true,
-      product
+      product,
+      productCount,
     });
 });
 //Get Product Details

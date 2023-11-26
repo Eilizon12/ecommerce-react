@@ -1,7 +1,11 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import {CgMouse} from "react-icons/cg";
 import "./Home.css"
-import Product from "./Product.js"
+import Product from "./Product.js";
+import Metadata from "../layout/Metadata";
+
+
+
 
 
 const product = {
@@ -12,10 +16,17 @@ const product = {
 };
 
 const Home = () => {
+
+ 
+
   return (
   <Fragment>
 
+<Metadata title ="Ecommerce Bike " />
+
+
 <div className="banner">
+    {/* <MetaData title = "ECOMMERCE REACT" /> */}
     <p>Welcome To Bike Shop</p>
     <h1>Find Amazing Parts of Bike</h1>
 
