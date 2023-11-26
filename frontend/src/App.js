@@ -1,11 +1,11 @@
 import './App.css';
-import Header from "./Components/Layout/Header";
-
+import Headers from "./component/layout/Header.js";
 
 function App() {
-  return <Header />;
+  return (
 
-
+    <Headers />
+  );
 }
 
 export default App;
