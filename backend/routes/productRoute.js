@@ -7,6 +7,7 @@ const router =  express.Router();
 
 
 router.route("/products").get(getAllProduct);
+
 router.route("/admin/products/new").post(isAuthenticatedUser,authorizeRoles("admin"),createProduct);
 router.route("/admin/products/:id").put(isAuthenticatedUser,authorizeRoles("admin"), updateProduct).delete(isAuthenticatedUser, authorizeRoles("admin"),deleteProduct).get(isAuthenticatedUser, authorizeRoles("admin"), getProductDetails);
 
