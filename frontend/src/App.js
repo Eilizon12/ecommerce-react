@@ -1,15 +1,11 @@
-// App.js
-
 import './App.css';
-import {Header} from './components/layout/Header'; // Import Header component
-import {BrowserRouter as Router} from "react-router-dom"
+import Header from "./Components/Layout/Header";
+
 
 function App() {
-  return (
-  <Router>
-      <Header />
-   </Router>
-  );
+  return <Header />;
+
+
 }
 
 export default App;
