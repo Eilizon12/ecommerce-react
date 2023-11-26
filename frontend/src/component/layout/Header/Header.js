@@ -1,7 +1,7 @@
 import React from 'react'
 import {ReactNavbar} from "overlay-navbar";
 
-import logo from "../../image/nobg2.png";
+import logo from "../../../image/nobg2.png";
 
 
 const Header = () => {
@@ -11,8 +11,8 @@ const Header = () => {
   logo={logo}
   logoWidth="20vmax"
   navColor1="beige"
-  logoHoverSize="10px"
-  logoHoverColor="#eb4034"
+  logoHoverSize="5px"
+  logoHoverColor="blue"
 
   link1Text="Home"
   link2Text="Product"
