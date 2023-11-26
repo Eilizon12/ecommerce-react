@@ -22,6 +22,7 @@ import {
             dispatch({
                 type:ALL_PRODUCT_SUCCESS,
                 payload:data,
+                
             });
 
             
@@ -38,7 +39,7 @@ import {
   export const clearErrors = () => async (dispatch) => {
     
     dispatch({
-        type:CLEAR_ERRORS
-    })
+        type:CLEAR_ERRORS,
+    });
 
   }

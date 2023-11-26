@@ -5,30 +5,25 @@ import {
   CLEAR_ERRORS
 } from "../constants/productConstants";
 
-const initialState = {
-  products: [],
-  loading: false,
-  error: null,
-  productsCount: 0
-};
 
-const productReducer = (state = initialState, action) => {
+
+const productReducer = (state = {products: [] }, action) => {
   switch (action.type) {
     case ALL_PRODUCT_REQUEST:
       return {
-        ...state,
-        loading: true
+    
+        loading: true,
+        product: [],
       };
     case ALL_PRODUCT_SUCCESS:
       return {
-        ...state,
         loading: false,
         products: action.payload.products,
-        productsCount: action.payload.productsCount
+        productsCount: action.payload.productsCount,
       };
     case ALL_PRODUCT_FAIL:
       return {
-        ...state,
+       
         loading: false,
         error: action.payload
       };

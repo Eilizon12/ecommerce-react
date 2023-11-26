@@ -7,7 +7,7 @@ const { newOrder, myOrders, getSingleOrder, getAllOrders, getUpdateOrders, getDe
 
 router.route("/orders/new").post(isAuthenticatedUser, newOrder);
 router.route("/orders/:id").get(isAuthenticatedUser,getSingleOrder);
-router.route("/orders/me").get(isAuthenticatedUser, myOrders);
+router.route("/orders/me").get(isAuthenticatedUser,authorizeRoles("admin"), myOrders);
 
 router.route("/admin/orders").get(isAuthenticatedUser, authorizeRoles("admin"),getAllOrders);
 

@@ -9,8 +9,8 @@ const catchAsyncError = require("../middleware/catchAsyncError");
 exports.getAllProduct = catchAsyncError(async(req,res)=> {
 
 
-  const resultPerPage = 5;  
-  const productCount = await Product.countDocument();
+  const resultPerPage = 8;  
+  const productCount = await Product.countDocuments();
 
 
  const apiFeatures = new ApiFeatures(Product.find(),req.query)
@@ -35,7 +35,7 @@ exports.getProductDetails = catchAsyncError(async(req,res,next)=>{
 
     res.status(200).json({
       success:true,
-      product,
+      products,
     });
  
 });

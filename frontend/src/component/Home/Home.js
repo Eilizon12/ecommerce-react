@@ -17,7 +17,6 @@ const product = {
 
 const Home = () => {
     const dispatch = useDispatch();
-
     useEffect(()=>{
 
         dispatch(getProduct());
@@ -28,6 +27,7 @@ const Home = () => {
 
 
   return (
+    
   <Fragment>
 
     <MetaData title = "BIKE SHOP Ecommerce" />
@@ -46,16 +46,8 @@ const Home = () => {
 
     <div className="container" id = "container">
 
-        <Product product = {product} />
-        <Product product = {product} />
-        <Product product = {product} />
-        <Product product = {product} />
-
-        <Product product = {product} />
-        <Product product = {product} />
-        <Product product = {product} />
-        <Product product = {product} />
-
+    <Product product = {product} />      
+      
     </div>
   </Fragment>
   );
