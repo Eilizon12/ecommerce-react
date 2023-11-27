@@ -2,3 +2,26 @@
     margin: 0;
     scroll-behavior: smooth;
 }
+
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* input[type="number"] {
+    -moz-appearance: textfield;
+} */
+
+input[type="number"] {
+    -webkit-appearance: textfield; /* For older WebKit browsers */
+    appearance: textfield; /* Standard appearance property */
+  }
+
+.greenColor {
+    color: green;
+}
+.redColor {
+    color: red;
+}

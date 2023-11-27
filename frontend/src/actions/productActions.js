@@ -46,14 +46,14 @@ import {
 
 
         dispatch({
-            type:ALL_PRODUCT_REQUEST
+            type:PRODUCT_DETAILS_REQUEST,
         });
 
         const {data} = await axios.get(`/api/v1/product/${id}`)
 
         dispatch({
-            type:ALL_PRODUCT_SUCCESS,
-            payload:data.product,
+            type:PRODUCT_DETAILS_SUCCESS,
+            payload:data.products,
             
         });
 
@@ -61,7 +61,7 @@ import {
     } catch (error) {
 
         dispatch({
-            type:ALL_PRODUCT_FAIL,
+            type:PRODUCT_DETAILS_FAIL,
             payload:error.response.data.message,
         });
         
