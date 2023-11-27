@@ -56,6 +56,11 @@
     height: 70%;
     transition: all 0.5s;
 }
+
+
+.signUpForm{
+    transform: translateY(-100%) translateX(-100%);
+}
 .loginForm > div,
 .signUpForm > div {
     display: flex;
@@ -64,12 +69,90 @@
 }
 .loginForm > div > input,
 .signUpForm > div > input {
-    padding: 4vmax;
+    padding: 1vmax 4vmax;
     padding-right: 1vmax;
     width: 100%;
     box-sizing: border-box;
-    border: 1px solid gray;
-    border: 4px;
+    border: 3px solid black;
+    border-radius:  4px;
     font: 300 0.9vmax cursive;
     outline: none;
 }
+.loginForm > div > svg,
+.signUpForm > div > svg {
+    position: absolute;
+    transform: translateX(1vmax);
+    font-size: 1.6vmax;
+    color: gray;
+}
+.loginForm > a {
+    color: black;
+    text-decoration: none;
+    align-self: flex-end;
+    transition: all 0.5s;
+    font: 500 0.8vmax "Gill Sans";
+}
+
+#registerImage > img {
+    width: 8vmax;
+    border-radius: 100%;
+
+}
+#registerImage > input {
+    display: flex;
+    padding: 0%;
+
+}
+
+#registerImage > input::file-selector-button {
+
+    cursor: pointer;
+    width: 100%;
+    z-index: 2;
+    height: 5vh;
+    border: none;
+    margin: 0%;
+    font: 400 0.8vmax cursive;
+    color: black;
+    background-color: rgb(176, 173, 173);
+}
+#registerImage > input::file-selector-button:hover {
+    background-color: white;
+
+}
+
+.loginForm > a:hover {
+    color: black;
+}
+.loginBtn,
+.signUpBtn {
+
+    border: none;
+    background-color: gray;
+    color: white;
+    font: 300 0.9vmax cusrive;
+    width: 100%;
+    padding: 0.8vmax;
+    cursor: pointer;
+    transition: all 0.5s;
+    border-radius: 4px;
+    outline: none;
+    box-shadow: 0 2px 5px lightgray;
+}
+.loginBtn:hover,
+.signUpBtn:hover {
+background-color: red;
+}
+.shiftToLeft {
+    transform: translateX(-100%);
+}
+.shiftToNeutral {
+    transform: translateX(0%);
+}
+.shiftToNeutralForm {
+    transform: translateX(0%) translateY(-100%);
+}
+.shiftToRight {
+    transform: translateX(100%);
+}
+
