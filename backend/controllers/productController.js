@@ -21,6 +21,7 @@ exports.getAllProduct = catchAsyncError(async(req,res,next )=> {
       success:true,
       products,
       productCount,
+      resultPerPage,
     });
 });
 //Get Product Details

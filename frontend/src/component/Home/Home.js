@@ -7,6 +7,8 @@ import { getProduct , clearErrors} from "../../actions/productActions";
 import { useSelector, useDispatch   } from "react-redux";
 import Loader from "../layout/Loader/Loader.js";
 import {useAlert} from "react-alert";
+import "./Login.css";
+
 
 
 
@@ -44,8 +46,13 @@ const Home = () => {
 
 <MetaData title = "BIKE SHOP Ecommerce" />
 
+
+
+
 <div className="banner">
-    <p>Welcome To Eili's Bike Shop</p>
+    
+<a href="/login" className="login">Login / Register</a>
+    <p>Welcome To Eili's Bike Shop </p>
     <h1>FIND GOOD QUALITY AND TRUSTED PRODUCT BELOW</h1>
 
     <a href="#container">
