@@ -1,6 +1,12 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {ReactNavbar} from "overlay-navbar";
 import logo from "../../../images/nobg.png";
+
+// import { useDispatch, useSelector } from "react-redux";
+
+
+// import "../../../App.css"
+// import { Link } from "react-router-dom";
 
 
 const options = {
@@ -14,13 +20,13 @@ const options = {
 
     link1Text:"Home",
     link2Text:"Product",
-    link3Text:"Contact",
+    link3Text:"Profile",
     link4Text:"About",
-    
+    link5Text:"About",
 
     link1Url :"/",
     link2Url :"/products",
-    link3Url :"/contact",
+    link3Url :"/account",
     link4Url :"/about",
 
     link1Size : "2vmax",
@@ -47,8 +53,17 @@ const options = {
 
 
 const Header = () => {
+
+// const alert = useAlert();
+// const dispatch = useDispatch();
+
+// const { user, loading } = useSelector (state => state.user)
+
   return(
+    <Fragment>
 <ReactNavbar {...options} />
+
+</Fragment>
    )
 };
 

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import {CgMouse} from "react-icons/cg";
 import "./Home.css";
 import Product from "./ProductCard.js";
@@ -22,6 +22,10 @@ const Home = () => {
     const dispatch = useDispatch();
     const {loading, error, products, productsCount } = useSelector ( (state) => state.products);
 
+    const [category,setCategory] =useState('')
+    const categories = [
+        category
+    ]
 
     useEffect(()=>{
 

@@ -1,19 +1,25 @@
 import React, { Fragment, useRef, useState, useEffect} from "react";
-import "./LoginSignup.css";
 import Loader from "../layout/Loader/Loader";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import FaceIcon from "@material-ui/icons/Face";
 import {useDispatch, useSelector} from "react-redux";
-import {clearErrors, login} from "../../actions/userActions";
+import {clearErrors, login, register} from "../../actions/userActions";
 import {useAlert} from "react-alert";
+// import history from "connect-history-api-fallback";
+import "./LoginSignup.css";
 
+
+
+
+    
 
 
 const LoginSignup = ({history}) => {
 const dispatch = useDispatch();
 const alert = useAlert();
+// const history = history();
 
 
 
@@ -55,7 +61,7 @@ const {error,loading, isAuthenticated} = useSelector(state => state.user)
         myForm.set("email", email);
         myForm.set("password", password);
         myForm.set("avatar", avatar);
-        console.log("SignUp Form Submited")
+      dispatch(register(myForm()))
 
     }
 
@@ -84,7 +90,7 @@ const {error,loading, isAuthenticated} = useSelector(state => state.user)
      }
 
     if (isAuthenticated){
-        history.pop("/account");
+    //    history.push("/products")
     }
 
        
