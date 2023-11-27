@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getProductDetails } from "../../actions/productActions";
 import { useParams } from "react-router-dom"; // Import useParams hook to get route params
 import ReactStars from "react-rating-stars-component";
+import ReviewCard from "./ReviewCard.js";
 
 const ProductDetails = ({ match }) => {
 
@@ -77,6 +78,18 @@ const ProductDetails = ({ match }) => {
           <button className="SubmitReviews">Submit Review</button>
         </div>
       </div>
+      <>
+      <h1 className="rHeading"> REVIEWS </h1>
+              {products && products.reviews && products.reviews[0] ? (
+
+                <div className="reviews">
+                  {products && products.reviews.map((review) => < ReviewCard review = {review} /> )}
+                </div>
+              
+              ) : (
+                <p className="noReviews">No Reviews Yet</p>
+              ) }
+</>
     </Fragment>          
   );
 };

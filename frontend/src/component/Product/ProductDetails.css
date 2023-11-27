@@ -141,6 +141,26 @@
     transform: scale(1.1);
 }
 
+.rHeading {
+    text-align: center;
+    /* Other styles for your heading */
+  }
+
+.reviewCard {
+    flex: none;
+    box-shadow: 0 0 5px gray;
+    border: 2px solid black;
+    width: 30vmax;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3vmax;
+}
+
+
+
+
+
 @media screen and (max-width: 600px){
 
     .productDetails {
@@ -161,6 +181,8 @@
     }
     
 }
+
+
 
 
 
