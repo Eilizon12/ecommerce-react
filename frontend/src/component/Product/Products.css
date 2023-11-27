@@ -1,0 +1,15 @@
+.productsHeading {
+    margin: 2vmax auto;
+    width: 15vw;
+    border-bottom: 2px solid gray;
+    padding: 2vmax;
+    color: black;
+    font: 500 1.5vmax cursive;
+    text-align: center;
+}
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.5vmax;
+    justify-content: center;
+}
