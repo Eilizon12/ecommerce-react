@@ -39,6 +39,7 @@ const {error,loading, isAuthenticated} = useSelector(state => state.user)
         name:"",
         email:"",
         password:"",
+        avata:null,
     });
 
 
@@ -52,35 +53,51 @@ const {error,loading, isAuthenticated} = useSelector(state => state.user)
         dispatch(login(loginEmail,loginPassword))
     }
 
+
+
     const registerSubmit = (e) => {
         e.preventDefault();
-
+      
         const myForm = new FormData();
+        myForm.append('name', name);
+        myForm.append('email', email);
+        myForm.append('password', password);
+        myForm.append('avatar', avatar);
+      
+        dispatch(register(myForm));
+      };
+      
 
-        myForm.set("name",name);
-        myForm.set("email", email);
-        myForm.set("password", password);
-        myForm.set("avatar", avatar);
-      dispatch(register(myForm()))
+    // const registerSubmit = (e) => {
+    //     e.preventDefault();
 
-    }
+    //     const myForm = new FormData();
 
-    const registerDataChange =(e) =>{
-        if(e.target.name === "avatar"){
+    //     myForm.set('name', name);
+    //     myForm.set('email', email);
+    //     myForm.set('password', password);
+    //     myForm.set('avatar', avatar);
+        
+    //     dispatch(register(myForm)); // Pass the FormData object directly without invoking it as a function
+        
 
-            const reader = new FileReader();
+    // }
 
-            reader.onload = () => {
-                if(reader.readyState === 2){
-
-                    setAvatarPreview(reader.result);
-                }
-            };
-                reader.readAsDataURL(e.target.file[0])
-        }else{
-            setUser({...user,[e.target.name]: e.target.value});
+    const registerDataChange = (e) => {
+        if (e.target.name === "avatar") {
+          const reader = new FileReader();
+      
+          reader.onload = () => {
+            if (reader.readyState === 2) {
+              setAvatarPreview(reader.result);
+            }
+          };
+          reader.readAsDataURL(e.target.files[0]); // Use e.target.files instead of e.target.file
+        } else {
+          setUser({ ...user, [e.target.name]: e.target.value });
         }
-    };
+      };
+      
 
     useEffect(() => {
      if(error){
