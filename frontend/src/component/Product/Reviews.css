@@ -1,0 +1,19 @@
+.rHeading {
+    color: darkred;
+    font: 500 1.4vmax;
+    text-align: center;
+    border-bottom: 2px solid black;
+    padding: 1vmax;
+    width: 20vmax;
+    margin: auto;
+    margin-bottom: 4vmax;
+  }
+
+.noReviews {
+    font: 400 1.3vmax "Gill Sans";
+    text-align: center;
+    color: gray;
+}
+.reviews{
+    display: flex;
+}
