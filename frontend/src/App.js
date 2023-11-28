@@ -9,7 +9,9 @@ import Home from './component/Home/Home.js';
 import ProductDetails from "./component/Product/ProductDetails.js";
 import Products from "./component/Product/Products.js";
 import Search from "./component/Product/Search.js";
+
 import Login from './component/User/Login.js';
+import Register from './component/User/Register.js';
 // import LoginSignup from './component/User/LoginSignup.js';
 
 function App() {
@@ -32,6 +34,7 @@ function App() {
 
 
         <Route exact path="/login" element = {<Login /> } />
+        <Route exact path="/register" element = {<Register /> } />
 s
 
       </Routes>

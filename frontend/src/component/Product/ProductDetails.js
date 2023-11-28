@@ -2,13 +2,13 @@ import React, { Fragment, useEffect } from "react";
 import Carousel from "react-material-ui-carousel";
 import "./ProductDetails.css";
 import "./Reviews.css";
-import { useAlert } from "react-alert";
 import { useSelector, useDispatch } from "react-redux";
 import { clearErrors, getProductDetails } from "../../actions/productActions";
 import { useParams } from "react-router-dom"; // Import useParams hook to get route params
 import ReactStars from "react-rating-stars-component";
 import ReviewCard from "./ReviewCard.js";
 import Loader from "../layout/Loader/Loader.js";
+import { useAlert } from "react-alert";
 
 const ProductDetails = ({ match }) => {
 

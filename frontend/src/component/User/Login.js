@@ -11,7 +11,6 @@ const Login = () => {
   const [password, setPassword] = useState('');
 
   const alert = useAlert();
-
   const navigate = useNavigate();
 
   const { isAuthenticated, error, loading } = useSelector((state) => state.auth);
