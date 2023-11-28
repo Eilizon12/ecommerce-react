@@ -10,7 +10,7 @@
 .products {
     display: flex;
     flex-wrap: wrap;
-    padding: 0 5vmax;
+    padding: 5vmax;
     justify-content: center;
 
 }
@@ -25,6 +25,30 @@
     padding: 0.5vmax 2vmax;
     margin: 1vmax;
     outline: none;
+}
+.addButton {
+  border: none;
+  cursor: pointer;
+  color: white;
+  transition: all 0.5s;
+  background-color: tomato;
+  font: 500 0.7vmax "Roboto";
+  border-radius: 20px;
+  padding: 0.8vmax 6vmax;
+  margin: 25vmax;
+  outline: none;
+}
+.add Button {
+  border: none;
+  cursor: pointer;
+  color: white;
+  transition: all 0.5s;
+  background-color: tomato;
+  font: 500 0.7vmax "Roboto";
+  border-radius: 20px;
+  padding: 0.5vmax 2vmax;
+  margin: 1vmax;
+  outline: none;
 }
 .paginationBox {
     display: flex;
@@ -69,57 +93,121 @@
 .pageLinkActive {
     color: white;
 }
-.dropdown {
-    position: relative;
-    display: inline-block;
+
+  /* Checkout Steps */
+  
+  .checkout-progress div {
+    box-sizing: border-box;
   }
   
-  /* Style for the dropdown button */
-  .dropdown .dropdown-toggle {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: gray;
-    cursor: pointer;
-  }
-  
-  /* Style for the avatar image */
-  .dropdown .avatar img {
-    width: 40px; /* Adjust the width as needed */
-    height: 40px; /* Adjust the height as needed */
-    border-radius: 50%;
-    margin-right: 8px; /* Adjust the margin as needed */
-  }
-  
-  /* Style for the dropdown menu */
-  .dropdown .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 1;
-    display: none;
-    min-width: 100px;
-    padding: 8px 0;
-    margin-top: 4px;
-    background-color:beige;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
-  }
-  
-  /* Show the dropdown menu on hover */
-  .dropdown:hover .dropdown-menu {
+  .checkout-progress {
     display: block;
+    clear: both;
+    margin: 20px auto;
+    width: auto;
+    font-family: sans-serif;
+    overflow: auto;
   }
   
-  /* Style for the dropdown menu items */
-  .dropdown .dropdown-menu .drop-item {
-    display: block;
-    padding: 8px 16px;
+  .step {
+    margin: 0;
+    border: 0;
+    letter-spacing: 1px;
+    line-height: 30px;
+    padding: 5px 10px 5px 15px;
+    color: grey;
     text-decoration: none;
-    color: #dc3545; /* Adjust the text color as needed */
+    cursor: default;
+    font-weight: bold;
+    float: left;
+    height: auto;
   }
   
-  /* Style for the dropdown menu items on hover */
-  .dropdown .dropdown-menu .drop-item:hover {
-    background-color: white; /* Adjust the background color on hover */
+  .incomplete {
+    background: #eeeeee;
   }
+  
+  .active-step {
+    background: #fa9c23;
+    color: #fff;
+  }
+  
+  .triangle-active {
+    float: left;
+    width: 0;
+    border-top: 20px solid transparent;
+    border-left: 15px solid #fa9c23;
+    border-bottom: 20px solid transparent;
+    margin-left: -1px;
+  }
+  
+  .triangle2-active {
+    width: 0;
+    float: left;
+    border-top: 20px solid #fa9c23;
+    border-left: 15px solid #fff;
+    border-bottom: 20px solid #fa9c23;
+    margin-right: -1px;
+  }
+  
+  .triangle-incomplete {
+    float: left;
+    width: 0;
+    border-top: 20px solid transparent;
+    border-left: 15px solid #eeeeee;
+    border-bottom: 20px solid transparent;
+    margin-left: -1px;
+  }
+  
+  .triangle2-incomplete {
+    width: 0;
+    float: left;
+    border-top: 20px solid #eeeeee;
+    border-left: 15px solid #fff;
+    border-bottom: 20px solid #eeeeee;
+    margin-right: -1px;
+  }
+
+  /* Dropdown button styles */
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+}
+
+.avatar img {
+  width: 30px; /* Adjust as needed */
+  height: 30px; /* Adjust as needed */
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+/* Dropdown menu container */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  min-width: 120px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  margin-top: 5px; /* Adjust the top margin as needed */
+}
+
+/* Dropdown menu items */
+.drop-item {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #dc3545; /* Adjust color as needed */
+}
+
+.drop-item:hover {
+  background-color: #f8f9fa; /* Adjust background color on hover as needed */
+  color: #dc3545; /* Adjust color on hover as needed */
+}
+
+/* Show dropdown menu on hover */
+.dropdown:hover .dropdown-menu {
+  display: block;
+}

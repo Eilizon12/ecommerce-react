@@ -7,12 +7,18 @@ import ProductCard from "../Home/ProductCard";
 import Pagination from "react-js-pagination";
 import { Link } from "react-router-dom";
 import Metadata from "../layout/MetaData";
+import './Dropdown.css';
+
+
 
 const Products = () => {
+
+  
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { products, loading, error, productsCount, resultPerPage } = useSelector((state) => state.products);
   const [currentPage, setCurrentPage] = useState(1);
+  
 
   const setCurrentPageNo = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -31,12 +37,13 @@ const Products = () => {
       ) : (
         <Fragment>
           {error && <div className="error-message">{error}</div>}
-          <h2 className="productsHeading">Products <Link to="/search" className="searchButton">Search</Link></h2>
+          <h2 className="productsHeading">Products <Link to="/search" className="searchButton">Search</Link>  </h2>
+
           {user ? (
             <div className="dropdown">
               <Link
                 to="#"
-                className="dropdown-toggle text-black"
+                className="dropdown-toggle black"
                 type="button"
                 id="dropDownMenuButton"
                 data-toggle="dropdown"
@@ -46,7 +53,7 @@ const Products = () => {
                 <figure className="avatar">
                   {user.avatar && <img src={user.avatar.url} alt={user.name} className="rounded-circle" />}
                 </figure>
-                <span>{user.name}</span>
+                <h3>{user.name}</h3>
               </Link>
               <div className="dropdown-menu" aria-aria-labelledby="dropDownMenuButton">
 
@@ -62,7 +69,8 @@ const Products = () => {
                 <Link className="drop-item text-danger" to="/logout">Logout</Link>
               </div>
             </div>
-          ) : !loading && (<></>)}
+            
+          ) : <Link to="/login" className="login">Login</Link>}
 
           
           <div className="products">

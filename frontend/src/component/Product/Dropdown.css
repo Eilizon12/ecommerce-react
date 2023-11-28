@@ -1,0 +1,48 @@
+/* Dropdown button styles */
+.dropdown {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+  }
+  
+  .avatar img {
+    width: 30px; /* Adjust as needed */
+    height: 30px; /* Adjust as needed */
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  /* Dropdown menu container */
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  
+  /* Dropdown menu items */
+  .drop-item {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #dc3545; /* Adjust color as needed */
+  }
+  
+  .drop-item:hover {
+    background-color: #f8f9fa; /* Adjust background color on hover as needed */
+    color: #dc3545; /* Adjust color on hover as needed */
+  }
+  
+  /* Show dropdown menu on hover */
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+  

@@ -5,40 +5,59 @@ import Loader from '../layout/Loader/Loader';
 import MetaData from '../layout/MetaData';
 import { login, clearErrors } from '../../actions/userActions';
 import {useAlert} from 'react-alert';
+import Alert from '@mui/material/Alert';
+import '../../App.css'; // Import your CSS file for styling
+
+// import AlertTitle from '@mui/material/AlertTitle';
+// import Stack from '@mui/material/Stack';
 
 const Login = () => {
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const alert = useAlert();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { isAuthenticated, error, loading } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
+
+ 
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/products');
+      setShowSuccessAlert(true); // Set the state to show the success alert
+      setTimeout(() => {
+        setShowSuccessAlert(false); // Hide the success alert after some time (e.g., 3 seconds)
+        navigate('/products'); // Redirect to '/products' after hiding the alert
+      }, 2000);
     }
+  }, [isAuthenticated, navigate]);
 
-    if (error) {
-      alert.error(error);
-      dispatch(clearErrors());
-    }
-  }, [dispatch, alert,error, isAuthenticated, navigate]);
+ 
 
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(login(email, password));
   };
 
+
   return (
     <Fragment>
+      <MetaData title={'Login'} />
       {loading ? (
         <Loader />
       ) : (
         <Fragment>
-          <MetaData title={'Login'} />
+          {error && (
+            <Alert severity="error" onClose={() => dispatch(clearErrors())}>
+              {error}
+            </Alert>
+          )}
+
+          {/* Check if the success alert state is true and display the Alert component */}
+          
+
           <div className="row wrapper">
             <div className="col-10 col-lg-5">
               <form className="shadow-lg" onSubmit={submitHandler}>
@@ -80,7 +99,14 @@ const Login = () => {
                 <Link to="/register" className="float-right mt-3">
                   New User?
                 </Link>
+
+                {showSuccessAlert && (
+            <Alert severity="success" onClose={() => setShowSuccessAlert(false)}>
+              Successfully logged in!
+            </Alert>
+          )}
               </form>
+              
             </div>
           </div>
         </Fragment>

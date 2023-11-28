@@ -70,9 +70,7 @@ const Home = () => {
 </div>
 <h2 className="homeHeading">Featured Product</h2>
 
-{user ? (
-  <></> // Render something for authenticated users here
-) : !loading && <Link to="/login" className="login">Login</Link>}
+
 
           
 <Link to="/products" className="product">All Products</Link>
