@@ -1,27 +1,101 @@
-*{
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
-    scroll-behavior: smooth;
-}
-
-
-input::-webkit-inner-spin-button,
-input::-webkit-outer-spin-button{
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-/* input[type="number"] {
-    -moz-appearance: textfield;
-} */
-
-input[type="number"] {
-    -webkit-appearance: textfield; /* For older WebKit browsers */
-    appearance: textfield; /* Standard appearance property */
+    padding: 0;
   }
 
-.greenColor {
-    color: green;
-}
-.redColor {
-    color: red;
-}
+
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+    font-weight: 700;
+  }
+  
+  
+  
+  .wrapper form .btn {
+    background-color: #fa9c23;
+    border-color: #fa9c23;
+    color: white;
+    margin-top: 2.5rem;
+  }
+  
+  .wrapper form a {
+    font-size: 0.9rem;
+    color: grey;
+  }
+
+
+
+
+  
+  
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+    font-weight: 700;
+  }
+  
+  .wrapper form {
+    padding: 2.5rem 3rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .wrapper form h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-group input[type="email"],
+  .form-group input[type="password"] {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  .btn {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 4px;
+    border: none;
+    background-color: #fa9c23;
+    color: white;
+    cursor: pointer;
+    margin-top: 2.5rem;
+  }
+  
+  .btn:hover {
+    background-color: #e08000;
+  }
+  
+  .options {
+    margin-top: 1.5rem;
+    text-align: center;
+  }
+  
+  .options a {
+    font-size: 0.9rem;
+    color: grey;
+    text-decoration: none;
+  }
+  
+  .options a:hover {
+    text-decoration: underline;
+  }

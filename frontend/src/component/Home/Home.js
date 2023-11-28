@@ -8,6 +8,8 @@ import { useSelector, useDispatch   } from "react-redux";
 import Loader from "../layout/Loader/Loader.js";
 import {useAlert} from "react-alert";
 import "./Login.css";
+import '../../App.css'
+import { Link } from "react-router-dom";
 
 
 
@@ -55,7 +57,7 @@ const Home = () => {
 
 <div className="banner">
     
-<a href="/login" className="login">Login / Register</a>
+<Link to="/login" className="login">Login</Link>
     <p>Welcome To Eili's Bike Shop </p>
     <h1>FIND GOOD QUALITY AND TRUSTED PRODUCT BELOW</h1>
 

@@ -1,16 +1,26 @@
 const express = require("express");
 const app = express();
+
 const cookieParser = require("cookie-parser");
+const cloudinary = require ('cloudinary')
 const errorMiddleware = require("./middleware/error");
 
-const bodyParser = require("body-parser");
+const bodyparser = require("body-parser");
 const fileUpload = require("express-fileupload");
 
 
 app.use(express.json());
+app.use(bodyparser.urlencoded({
+    extended:true
+}));
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(fileUpload());
+
+//Cloudinary
+cloudinary.config({
+    cloud_name: process.CLOUDINARY_NAME,
+    api_key:process.CLOUDINARY_API_KEY,
+    api_secret:process.CLOUDINARY_API_SECRET,
+})
 
 //Route Imports
 const product = require("./routes/productRoute");
