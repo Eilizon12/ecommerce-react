@@ -4,10 +4,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../layout/Loader/Loader';
 import MetaData from '../layout/MetaData';
 import { login, clearErrors } from '../../actions/userActions';
+import {useAlert} from 'react-alert';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const alert = useAlert();
+
   const navigate = useNavigate();
 
   const { isAuthenticated, error, loading } = useSelector((state) => state.auth);
@@ -19,10 +23,10 @@ const Login = () => {
     }
 
     if (error) {
-      console.error(error);
+      alert.error(error);
       dispatch(clearErrors());
     }
-  }, [dispatch, error, isAuthenticated, navigate]);
+  }, [dispatch, alert,error, isAuthenticated, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
