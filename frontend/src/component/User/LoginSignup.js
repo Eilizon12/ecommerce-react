@@ -1,29 +1,25 @@
 import React, { Fragment, useRef, useState, useEffect} from "react";
+import "./LoginSignup.css";
 import Loader from "../layout/Loader/Loader";
 import { Link } from "react-router-dom";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import FaceIcon from "@material-ui/icons/Face";
 import {useDispatch, useSelector} from "react-redux";
-import {clearErrors, login, register} from "../../actions/userActions";
+import {clearErrors, login} from "../../actions/userActions";
 import {useAlert} from "react-alert";
-// import history from "connect-history-api-fallback";
-import "./LoginSignup.css";
+// import { useHistory } from "react-router-dom";
 
-
-
-
-    
 
 
 const LoginSignup = ({history}) => {
+
 const dispatch = useDispatch();
 const alert = useAlert();
-// const history = history();
 
 
 
-const {error,loading, isAuthenticated} = useSelector(state => state.user)
+const {error,loading, isAuthenticated} = useSelector(state => state.users)
 
     const loginTab = useRef(null);
     const registerTab = useRef(null);
@@ -35,15 +31,14 @@ const {error,loading, isAuthenticated} = useSelector(state => state.user)
     const [loginEmail,setLoginEmail] = useState("");
     const [loginPassword,setLoginPassword] = useState("");
 
-    const [user,setUser] = useState({
+    const [users,setUser] = useState({
         name:"",
         email:"",
         password:"",
-        avata:null,
     });
 
 
-    const {name,email,password} = user;
+    const {name,email,password} = users;
 
     const [avatar, setAvatar] = useState("/nobguser.png");
     const [avatarPreview, setAvatarPreview] = useState("/nobguser.png");
@@ -53,51 +48,35 @@ const {error,loading, isAuthenticated} = useSelector(state => state.user)
         dispatch(login(loginEmail,loginPassword))
     }
 
-
-
     const registerSubmit = (e) => {
         e.preventDefault();
-      
+
         const myForm = new FormData();
-        myForm.append('name', name);
-        myForm.append('email', email);
-        myForm.append('password', password);
-        myForm.append('avatar', avatar);
-      
-        dispatch(register(myForm));
-      };
-      
 
-    // const registerSubmit = (e) => {
-    //     e.preventDefault();
+        myForm.set("name",name);
+        myForm.set("email", email);
+        myForm.set("password", password);
+        myForm.set("avatar", avatar);
+        console.log("SignUp Form Submited")
 
-    //     const myForm = new FormData();
+    }
 
-    //     myForm.set('name', name);
-    //     myForm.set('email', email);
-    //     myForm.set('password', password);
-    //     myForm.set('avatar', avatar);
-        
-    //     dispatch(register(myForm)); // Pass the FormData object directly without invoking it as a function
-        
+    const registerDataChange =(e) =>{
+        if(e.target.name === "avatar"){
 
-    // }
+            const reader = new FileReader();
 
-    const registerDataChange = (e) => {
-        if (e.target.name === "avatar") {
-          const reader = new FileReader();
-      
-          reader.onload = () => {
-            if (reader.readyState === 2) {
-              setAvatarPreview(reader.result);
-            }
-          };
-          reader.readAsDataURL(e.target.files[0]); // Use e.target.files instead of e.target.file
-        } else {
-          setUser({ ...user, [e.target.name]: e.target.value });
+            reader.onload = () => {
+                if(reader.readyState === 2){
+
+                    setAvatarPreview(reader.result);
+                }
+            };
+                reader.readAsDataURL(e.target.file[0])
+        }else{
+            setUser({...users,[e.target.name]: e.target.value});
         }
-      };
-      
+    };
 
     useEffect(() => {
      if(error){
@@ -107,11 +86,11 @@ const {error,loading, isAuthenticated} = useSelector(state => state.user)
      }
 
     if (isAuthenticated){
-    //    history.push("/products")
+        // history.<Link to="/account"> </Link
     }
 
        
-    }, [dispatch,error,alert,  isAuthenticated]);
+    }, [dispatch,error,alert, history, isAuthenticated]);
     
 
     
