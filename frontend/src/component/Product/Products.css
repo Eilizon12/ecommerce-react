@@ -69,3 +69,57 @@
 .pageLinkActive {
     color: white;
 }
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Style for the dropdown button */
+  .dropdown .dropdown-toggle {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: gray;
+    cursor: pointer;
+  }
+  
+  /* Style for the avatar image */
+  .dropdown .avatar img {
+    width: 40px; /* Adjust the width as needed */
+    height: 40px; /* Adjust the height as needed */
+    border-radius: 50%;
+    margin-right: 8px; /* Adjust the margin as needed */
+  }
+  
+  /* Style for the dropdown menu */
+  .dropdown .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+    display: none;
+    min-width: 100px;
+    padding: 8px 0;
+    margin-top: 4px;
+    background-color:beige;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+  
+  /* Style for the dropdown menu items */
+  .dropdown .dropdown-menu .drop-item {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #dc3545; /* Adjust the text color as needed */
+  }
+  
+  /* Style for the dropdown menu items on hover */
+  .dropdown .dropdown-menu .drop-item:hover {
+    background-color: white; /* Adjust the background color on hover */
+  }

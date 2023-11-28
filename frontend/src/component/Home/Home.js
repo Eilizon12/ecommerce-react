@@ -10,7 +10,7 @@ import {useAlert} from "react-alert";
 import "./Login.css";
 import '../../App.css'
 import { Link } from "react-router-dom";
-
+// import user 
 
 
 
@@ -22,12 +22,13 @@ const Home = () => {
     const alert = useAlert();
 
     const dispatch = useDispatch();
-    const {loading, error, products, productsCount } = useSelector ( (state) => state.products);
 
-    const [category,setCategory] =useState('')
-    const categories = [
-        category
-    ]
+    const {loading, error, products, productsCount, user } = useSelector ( (state) => state.products);
+
+    // const [category,setCategory] =useState('')
+    // const categories = [
+    //     category
+    // ]
 
     useEffect(()=>{
 
@@ -56,8 +57,8 @@ const Home = () => {
 
 
 <div className="banner">
-    
-<Link to="/login" className="login">Login</Link>
+
+
     <p>Welcome To Eili's Bike Shop </p>
     <h1>FIND GOOD QUALITY AND TRUSTED PRODUCT BELOW</h1>
 
@@ -68,6 +69,13 @@ const Home = () => {
     </a>
 </div>
 <h2 className="homeHeading">Featured Product</h2>
+
+{user ? (
+  <></> // Render something for authenticated users here
+) : !loading && <Link to="/login" className="login">Login</Link>}
+
+          
+<Link to="/products" className="product">All Products</Link>
 
 <div className="container" id = "container">
 

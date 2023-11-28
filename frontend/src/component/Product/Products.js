@@ -1,62 +1,95 @@
 import React, { Fragment, useEffect, useState } from "react";
 import "./Products.css";
 import { useSelector, useDispatch } from "react-redux";
-import { clearErrors,getProduct } from "../../actions/productActions";
+import { clearErrors, getProduct } from "../../actions/productActions";
 import Loader from "../layout/Loader/Loader";
 import ProductCard from "../Home/ProductCard";
-import Pagination from "react-js-pagination"
-import Slide from "@material-ui/core/Slider"
+import Pagination from "react-js-pagination";
+import { Link } from "react-router-dom";
+import Metadata from "../layout/MetaData";
 
+const Products = () => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  const { products, loading, error, productsCount, resultPerPage } = useSelector((state) => state.products);
+  const [currentPage, setCurrentPage] = useState(1);
 
+  const setCurrentPageNo = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
-
-const Products = (match) => {
-    const dispatch = useDispatch();
-
-const [currentPage, setCurrentPage] = useState(1);
-
-
-
-
-
-    const {products, loading,error,productsCount, resultPerPage} = useSelector (state=> state.products);
-
-
-const setCurrentPageNo = (e) => { 
-  setCurrentPage(e)
-}
-
-
-useEffect(() => {
-
-  dispatch(getProduct())
-
-}, [dispatch,])
-
-
+  useEffect(() => {
+    dispatch(getProduct());
+  }, [dispatch]);
 
   return (
     <Fragment>
-        {loading ? <Loader /> : (
-            <Fragment>
-                
-                
-                <h2 className="productsHeading">Products <a href = "/search"  className="searchButton">Search</a></h2>
-                <div className="products">
-                    {products && products.map((product) =>
-                        <ProductCard key={product._id} product={product} />
-                    )}
-                </div>
+      <Metadata title="Products" />
+      {loading ? (
+        <Loader />
+    
+      ) : (
+        <Fragment>
+          {error && <div className="error-message">{error}</div>}
+          <h2 className="productsHeading">Products <Link to="/search" className="searchButton">Search</Link></h2>
+          {user ? (
+            <div className="dropdown">
+              <Link
+                to="#"
+                className="dropdown-toggle text-black"
+                type="button"
+                id="dropDownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <figure className="avatar">
+                  {user.avatar && <img src={user.avatar.url} alt={user.name} className="rounded-circle" />}
+                </figure>
+                <span>{user.name}</span>
+              </Link>
+              <div className="dropdown-menu" aria-aria-labelledby="dropDownMenuButton">
 
-                      <div className="paginationBox">
-                        <Pagination activePage={currentPage} itemsCountPerPage={resultPerPage} totalItemsCount={productsCount} onChange={setCurrentPageNo} nextPageText="Next" prevPageText= "Prev" firstPageText= "1st" lastPageText="Last" itemClass="page-item" linkClass="page-link" activeClass="pageItemActive"/>
-                      </div>
+                {user && user.role !== 'admin'?(
+              <Link className="drop-item text-danger" to="/order/me">Orders</Link>
 
+                ):(
+              <Link className="drop-item text-danger" to="/dashboard">Dashboard</Link>
 
-            </Fragment>
-        )}
+                )}
+
+              <Link className="drop-item text-danger" to="/profile">Profile</Link>
+                <Link className="drop-item text-danger" to="/logout">Logout</Link>
+              </div>
+            </div>
+          ) : !loading && (<></>)}
+
+          
+          <div className="products">
+            {products && products.map((product) =>
+              <ProductCard key={product._id} product={product} />
+            )}
+          </div>
+
+          <div className="paginationBox">
+            <Pagination 
+              activePage={currentPage} 
+              itemsCountPerPage={resultPerPage} 
+              totalItemsCount={productsCount} 
+              onChange={setCurrentPageNo} 
+              nextPageText="Next" 
+              prevPageText="Prev" 
+              firstPageText="1st" 
+              lastPageText="Last" 
+              itemClass="page-item" 
+              linkClass="page-link" 
+              activeClass="pageItemActive" 
+            />
+          </div>
+        </Fragment>
+      )}
     </Fragment>
-  )
-}
+  );
+};
 
-export default Products
+export default Products;
